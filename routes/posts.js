@@ -65,6 +65,7 @@ router.get("/posts/:_postId", async (req, res) => {
             postId: posting._id,
             user: posting.user,
             title: posting.title,
+            content: posting.content,
             //끝에는 ,표시 안해준다.해줘도 되지만 오류가 날수도 있음
             createdAt: posting.createdAt,
         });
