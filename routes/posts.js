@@ -26,7 +26,7 @@ router.post("/posts", async (req, res) => {
 router.get("/posts", async (req, res) => {
     try {
         //찾는 것을 포스팅이라고 설정함 //내가 보여주고 싶은 것을 찾는것
-        const posting = await Post.find();
+        const posting = await Post.find().sort({ createdAt: -1 });
         //콘솔 로그 찍어보는것 중요
         console.log(posting);
         // 찾는 값은 posts에 있다.
@@ -59,8 +59,10 @@ router.get("/posts/:_postId", async (req, res) => {
         const { _postId } = req.params;
         //한의 값을 찾을 꺼기 때문에 findOne으로 그리고 키 와 벨류 형 ({ 키 : 벨류 }) 를 사용
         const posting = await Post.findOne({ _id: _postId });
+        res.json({
+            data: posting,
+        });
 
-        console.log(posting);
         return res.json({
             postId: posting._id,
             user: posting.user,
